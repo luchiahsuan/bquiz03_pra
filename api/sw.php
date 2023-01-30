@@ -5,12 +5,12 @@ include_once "base.php";
 
 $db=${$_POST['table']};
 
-$row1=$Trailer->find($_POST['id1']);
-$row2=$Trailer->find($_POST['id2']);
+$row1=$db->find($_POST['id1']);
+$row2=$db->find($_POST['id2']);
 
 $tmp=$row1['rank'];
 $row1['rank']=$row2['rank'];
 $row2['rank']=$tmp;
 
-$Trailer->save($row1);
-$Trailer->save($row2);
+$db->save($row1);
+$db->save($row2);
