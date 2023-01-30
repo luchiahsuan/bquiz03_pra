@@ -3,6 +3,8 @@
 
 include_once "base.php";
 
+$db=${$_POST['table']};
+
 $row1=$Trailer->find($_POST['id1']);
 $row2=$Trailer->find($_POST['id2']);
 
