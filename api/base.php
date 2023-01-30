@@ -155,5 +155,5 @@ function q($sql){
     return $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 }
 
-$Tarlier=new DB ("trailer");
+$Trailer=new DB ("trailer");
 ?>
