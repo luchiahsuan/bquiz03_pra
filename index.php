@@ -26,8 +26,8 @@
       </marquee>
     </div>
     <div id="mm">
-      <?php include "./front/main.php
-"; ?>
+      <?php include "./front/main.php"; ?>
+
     </div>
     <div id="bo"> ©Copyright 2010~2014 ABC影城 版權所有 </div>
   </div>
