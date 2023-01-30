@@ -49,7 +49,7 @@
                     </tr>
                     <tr>
                         <td>發行商：</td>
-                        <td><input type="text" name="publich" id=""></td>
+                        <td><input type="text" name="publish" id=""></td>
                     </tr>
                     <tr>
                         <td>導演：</td>
