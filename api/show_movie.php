@@ -8,7 +8,7 @@ $movie=$Movie->find($_POST['id']);
 //     $movie['sh']=1;
 // }
 
-$movie['sh']==($movie['sh']+1)%2;
+$movie['sh']=($movie['sh']+1)%2;
 
 $Movie->save($movie);
 
