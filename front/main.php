@@ -170,20 +170,17 @@
     $(".pos").eq(0).show();
     let btns = $(".btn").length;
     let p = 0;
-    $(".right").on("click", function() {
-        if ((p + 4) < btns - 4)
-            p++;
-        $(".btn").css({
-            right: 80 * p
-        })
-    })
-    $(".right").on("click", function() {
-        if ((p - 4) <=0)
-            p--;
-        $(".btn").css({
-            right: 80 * p
-        })
-    })
+    $(".right,.left").on("click", function() {
+        if ($(this).hadClass('left')) {
+            if (p - 1 >= 0){
+                p - 1;
+        } else {
+            if (p + 1 <= btns - 4);{
+            p + 1;
+        }
+    }
+        $(".btn").animate({right: 80 * p});
+    }})
 
     var nowpage = 0,
         num = <?= count($posters); ?>;
