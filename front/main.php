@@ -8,7 +8,6 @@
     .pos {
         width: 210px;
         height: 280px;
-        margin-left: 105px;
         position: absolute;
         text-align: center;
         display: none;
@@ -71,6 +70,14 @@
         width: 100%;
         height: 80px;
     }
+
+    .lists {
+        width: 210px;
+        height: 280px;
+        position: relative;
+        margin: auto;
+        overflow: hidden;
+    }
 </style>
 <div class="half" style="vertical-align:top;">
     <h1>預告片介紹</h1>
@@ -78,10 +85,10 @@
         <div id="poster">
             <div class="lists">
                 <?php
-                $posters = $Trailer->all(['sh' => 1]);
+                $posters = $Trailer->all(['sh' => 1], " order by `rank`");
                 foreach ($posters as $poster) {
                 ?>
-                    <div class="pos">
+                    <div class="pos" data-ani="<?= $poster['ani']; ?>">
                         <img src="./upload/<?= $poster['img']; ?>" alt="">
                         <div><?= $poster['name']; ?></div>
                     </div>
@@ -172,15 +179,47 @@
     let p = 0;
     $(".right,.left").on("click", function() {
         if ($(this).hadClass('left')) {
-            if (p - 1 >= 0){
-                p - 1;
+            p = (p - 1 >= 0) ? p - 1 : p;
         } else {
-            if (p + 1 <= btns - 4);{
-            p + 1;
+            p = (p + 1 <= ntbs - 4) ? p + 1 : p;
+        }
+        $(".btn").animate({
+            right: 80 * p
+        });
+    })
+
+    let now = 0;
+    let counter = setInterval(() => {
+        ani();
+    }, 3000);
+
+    function ani() {
+        now = $(".pos:visible").index();
+        next = (now + 1 <= $(".pos").length - 1) ? now + 1 : 0;
+        let AniType = $('.pos').eq(next).data('ani');
+
+
+        switch (AniType) {
+
+            case 1:
+                $('.pos').eq(now).fadeout(1000, () => {
+                    $('.pos').eq(now).slidein(1000)
+                })
+                break;
+            case 2:
+                $('.pos').eq(now).hide(1000, () => {
+                    $('.pos').eq(now).show(1000)
+                })
+                break;
+            case 3:
+                $('.pos').eq(now).slideup(1000, () => {
+                    $('.pos').eq(now).slideup(1000)
+                })
+                break;
         }
     }
-        $(".btn").animate({right: 80 * p});
-    }})
+
+    
 
     var nowpage = 0,
         num = <?= count($posters); ?>;
@@ -199,5 +238,5 @@
             $("#pos" + t).show()
         }
     }
-    pp(1)
+    pp(1);
 </script>
