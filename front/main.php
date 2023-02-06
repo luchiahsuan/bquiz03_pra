@@ -57,7 +57,7 @@
             for ($i = 1; $i <= $pages; $i++) {
                 $size = ($i == $now) ? '20px' : '16px';
             ?>
-                <a href="index.php?p=$i" style="font-size: <?= $size; ?>"> $i </a>
+                <a href="index.php?p=$i" style="font-size: <?= $size; ?>"> <?=$i ;?> </a>
 
             <?php
             }
