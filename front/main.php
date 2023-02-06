@@ -97,12 +97,12 @@
                 ?>
             </div>
             <div class="controls">
-                <div class="left" onclick="pp(1)"></div>
+                <div class="left"></div>
                 <div class="btns">
                     <?php
-                    foreach ($posters as $key => $poster) {
+                    foreach ($posters as $poster) {
                     ?>
-                        <div class="btn" id="pos<?= $key; ?>">
+                        <div class="btn">
                             <img src="./upload/<?= $poster['img']; ?>" alt="">
                             <div><?= $poster['name']; ?></div>
                         </div>
@@ -110,11 +110,58 @@
                     }
                     ?>
                 </div>
-                <div class="right" onclick="pp(2)"></div>
+                <div class="right"></div>
             </div>
         </div>
     </div>
 </div>
+<script>
+    $(".pos").eq(0).show();
+    let btns = $(".btn").length;
+    let p = 0;
+    $(".right,.left").on("click", function() {
+        if ($(this).hasClass('left')) {
+            p = (p - 1 >= 0) ? p - 1 : p;
+        } else {
+            p = (p + 1 <= btns - 4) ? p + 1 : p;
+        }
+        $(".btn").animate({
+            right: 80 * p
+        });
+    })
+
+    let now = 0;
+    let counter = setInterval(() => {
+        ani();
+    }, 3000);
+
+    function ani() {
+        now = $(".pos:visible").index();
+        next = (now + 1 <= $(".pos").length - 1) ? now + 1 : 0;
+        let AniType = $('.pos').eq(next).data('ani');
+
+
+        switch (AniType) {
+
+            case 1:
+                $(".pos").eq(now).fadeOut(1000, () => {
+                    $(".pos").eq(next).fadeIn(1000)
+                })
+                break;
+            case 2:
+                $(".pos").eq(now).hide(1000, () => {
+                    $(".pos").eq(next).show(1000)
+                })
+                break;
+            case 3:
+                $(".pos").eq(now).slideUp(1000, () => {
+                    $(".pos").eq(next).slideDown(1000)
+                })
+                break;
+        }
+    }
+
+</script>
 
 
 
@@ -173,70 +220,3 @@
     </div>
 </div>
 
-<script>
-    $(".pos").eq(0).show();
-    let btns = $(".btn").length;
-    let p = 0;
-    $(".right,.left").on("click", function() {
-        if ($(this).hadClass('left')) {
-            p = (p - 1 >= 0) ? p - 1 : p;
-        } else {
-            p = (p + 1 <= ntbs - 4) ? p + 1 : p;
-        }
-        $(".btn").animate({
-            right: 80 * p
-        });
-    })
-
-    let now = 0;
-    let counter = setInterval(() => {
-        ani();
-    }, 3000);
-
-    function ani() {
-        now = $(".pos:visible").index();
-        next = (now + 1 <= $(".pos").length - 1) ? now + 1 : 0;
-        let AniType = $('.pos').eq(next).data('ani');
-
-
-        switch (AniType) {
-
-            case 1:
-                $('.pos').eq(now).fadeout(1000, () => {
-                    $('.pos').eq(now).slidein(1000)
-                })
-                break;
-            case 2:
-                $('.pos').eq(now).hide(1000, () => {
-                    $('.pos').eq(now).show(1000)
-                })
-                break;
-            case 3:
-                $('.pos').eq(now).slideup(1000, () => {
-                    $('.pos').eq(now).slideup(1000)
-                })
-                break;
-        }
-    }
-
-    
-
-    var nowpage = 0,
-        num = <?= count($posters); ?>;
-
-    function pp(x) {
-        var s, t;
-        if (x == 1 && nowpage - 1 >= 0) {
-            nowpage--;
-        }
-        if (x == 2 && (nowpage + 1) <= num * 1 - 4) {
-            nowpage++;
-        }
-        $(".btn").hide()
-        for (s = 0; s <= 3; s++) {
-            t = s * 1 + nowpage * 1;
-            $("#pos" + t).show()
-        }
-    }
-    pp(1);
-</script>
