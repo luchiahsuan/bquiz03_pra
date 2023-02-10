@@ -1,6 +1,8 @@
 <?php
 
 include_once "base.php";
+
+$bookings = [3, 6, 18, 19, 11, 14];
 ?>
 <style>
     #block {
@@ -25,18 +27,19 @@ include_once "base.php";
         position: relative;
     }
 
-    .seats input[type='checkbox']{
+    .seats input[type='checkbox'] {
         position: absolute;
         right: 5px;
         bottom: 5px;
     }
+
     .null-seat {
-        background-image: url(./icon/03D02.png);
+        background-image: url(./icon/03D03.png);
 
     }
 
     .booking-seat {
-        background-image: url(./icon/03D03.png);
+        background-image: url(./icon/03D02.png);
 
     }
 
@@ -53,22 +56,21 @@ include_once "base.php";
     <div class="seats">
         <?php
         for ($i = 0; $i < 20; $i++) {
-        ?>
+            if (in_array($i, $bookings)) {
 
-            <div class="null-seat">
-                <div>
-                    <?php
-                    echo (floor($i / 5) + 1) . "排" . ($i % 5 + 1) . "號";
-                    ?>
-                </div>
-                <input type="checkbox" value="$i">
-            </div>
-
-        <?php
+                echo "<div class='booking-seat'>";
+            } else {
+                echo "<div class='null-seat'>";
+            }
+            echo "<div>";
+            echo (floor($i / 5) + 1) . "排" . ($i % 5 + 1) . "號";
+            echo "</div>";
+            if (!in_array($i, $bookings)) {
+                echo "<input type='checkbox' value='$i'>";
+            }
+            echo "</div>";
         }
         ?>
-
-
     </div>
 </div>
 <div id="info">
