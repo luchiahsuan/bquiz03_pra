@@ -8,8 +8,6 @@ include_once "base.php";
         height: 370px;
         background-image: url(./icon/03D04.png);
         box-sizing: border-box;
-        background-position: center;
-        background-repeat: no-repeat;
         padding-top: 18px;
     }
 
@@ -21,34 +19,56 @@ include_once "base.php";
         margin: auto;
     }
 
-    .seats>div{
+    .seats>div {
         width: 20%;
         height: 85px;
+        position: relative;
+    }
+
+    .seats input[type='checkbox']{
+        position: absolute;
+        right: 5px;
+        bottom: 5px;
+    }
+    .null-seat {
+        background-image: url(./icon/03D02.png);
+
+    }
+
+    .booking-seat {
+        background-image: url(./icon/03D03.png);
+
+    }
+
+    #bolck,
+    .null-seat,
+    .booking-seat {
+        background-position: center;
+        background-repeat: no-repeat;
+
     }
 </style>
 
 <div id="block">
     <div class="seats">
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
-        <div>4</div>
-        <div>5</div>
-        <div>6</div>
-        <div>7</div>
-        <div>8</div>
-        <div>9</div>
-        <div>10</div>
-        <div>11</div>
-        <div>12</div>
-        <div>13</div>
-        <div>14</div>
-        <div>15</div>
-        <div>16</div>
-        <div>17</div>
-        <div>18</div>
-        <div>19</div>
-        <div>20</div>
+        <?php
+        for ($i = 0; $i < 20; $i++) {
+        ?>
+
+            <div class="null-seat">
+                <div>
+                    <?php
+                    echo (floor($i / 5) + 1) . "排" . ($i % 5 + 1) . "號";
+                    ?>
+                </div>
+                <input type="checkbox" value="$i">
+            </div>
+
+        <?php
+        }
+        ?>
+
+
     </div>
 </div>
 <div id="info">
