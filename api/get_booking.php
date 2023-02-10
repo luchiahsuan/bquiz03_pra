@@ -1,7 +1,7 @@
 <?php
 
 include_once "base.php";
-$bookings=[];
+$bookings = [];
 
 ?>
 <style>
@@ -80,7 +80,7 @@ $bookings=[];
 
     <div class="ct">
         <button onclick="$('#orderForm,#booking').toggle();$('#booking').html('')">上一步</button>
-        <button>確定</button>
+        <button onclick="checkOut()">確定</button>
     </div>
 </div>
 
@@ -97,10 +97,23 @@ $bookings=[];
                 seats.push($(this).val())
             }
         } else {
-            seats.splice(seats.indexOf($(this).val()),1)
+            seats.splice(seats.indexOf($(this).val()), 1)
         }
-        console.log('seats',seats);
+        console.log('seats', seats);
+        $("#tickets").text(seats.length)
 
 
     })
+
+    function checkOut() {
+        $.post("./api/order.php", {
+            seats,
+            movie: $("#movie option:selected").text(),
+            date: $("#day option:selected").text(),
+            session:$("#session option:selected").val()},
+            (result)=>{
+                console.log(result)
+            }
+        )
+    }
 </script>
