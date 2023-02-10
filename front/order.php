@@ -1,3 +1,5 @@
+<div id="orderForm">
+
 <h3 class="ct">線上訂票</h3>
 
 <table style="width: 50%; margin:0 auto">
@@ -22,8 +24,17 @@
 </table>
 
 <div class="ct">
-    <button>確定</button>
+    <button onclick="$('#orderForm,#booking').toggle();getBooking()">確定</button>
     <button>重置</button>
+</div>
+</div>
+
+<div id="booking" style=" display:none">
+    <div class="ct">
+
+        <button onclick="$('#orderForm,#booking').toggle();$('#booking').html('')">上一步</button>
+        <button>確定</button>
+    </div>
 </div>
 
 <script>
@@ -35,6 +46,16 @@ $("#movie").on("change",function(){
 $("#day").on("change",function(){
     getsessions($("#movie").val(),$("#day").val());
 })
+
+function getBooking(){
+    $.get("./api/get_booking.php", {}, (booking) => {
+            $("#booking").html(booking);
+            $("#selectMovie").text($("#movie option:selected").text())
+            $("#selectDate").text($("#day option:selected").text())
+            $("#selectSession").text($("#session option:selected").val())
+        })
+}
+
 
     function getMovies() {
         let params = {}
@@ -65,4 +86,5 @@ $("#day").on("change",function(){
             $("#session").html(sessions);
         })
     }
+
 </script>
