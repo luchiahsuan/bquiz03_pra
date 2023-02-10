@@ -2,7 +2,6 @@
 
 include_once "base.php";
 
-$bookings = [3, 6, 18, 19, 11, 14];
 ?>
 <style>
     #block {
@@ -34,12 +33,12 @@ $bookings = [3, 6, 18, 19, 11, 14];
     }
 
     .null-seat {
-        background-image: url(./icon/03D03.png);
+        background-image: url(./icon/03D02.png);
 
     }
 
     .booking-seat {
-        background-image: url(./icon/03D02.png);
+        background-image: url(./icon/03D03.png);
 
     }
 
@@ -83,3 +82,23 @@ $bookings = [3, 6, 18, 19, 11, 14];
         <button>確定</button>
     </div>
 </div>
+
+<script>
+    let seats = [];
+
+    $(".chk").on("change", function() {
+
+        if ($(this).prop('checked')) {
+            if (seats.length >= 4) {
+                alert("最多只能購買四張票");
+                $(this).prop('checked', false)
+            } else {
+                seats.push($(this).val())
+            }
+        } else {
+            seats.splice(seats.indexOf($(this).val()),1)
+        }
+
+
+    })
+</script>
