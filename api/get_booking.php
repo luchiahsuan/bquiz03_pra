@@ -90,7 +90,6 @@ $bookings=[];
     $(".chk").on("change", function() {
 
         if ($(this).prop('checked')) {
-            console.log('seats',seats);
             if (seats.length >= 4) {
                 alert("最多只能購買四張票");
                 $(this).prop('checked', false)
