@@ -161,6 +161,16 @@
         }
     }
 
+    $(".btns").hover(
+        function() {
+            clearInterval(counter)
+        },
+        function() {
+            count = setInterval(() => {
+                ani();
+            }, 3000);
+        }
+    )
 </script>
 
 
@@ -219,4 +229,3 @@
         </div>
     </div>
 </div>
-
