@@ -182,8 +182,9 @@
             <?php
             $today = date("Y-m-d");
             $ondate = date("Y-m-d", strtotime("-2 days"));
+            $all=$Movie->count(" where `sh`=1 && `ondate` between '$ondate' AND '$today'");
 
-            $all = q("select count(*) as 'total' from `movie` where `sh`=1 && `ondate` between '$ondate' AND '$today'")[0]['total'];
+            // $all = q("select count(*) as 'total' from `movie` where `sh`=1 && `ondate` between '$ondate' AND '$today'")[0]['total'];
             $div = 4;
             $pages = ceil($all / $div);
             $now = $_GET['p'] ?? 1;

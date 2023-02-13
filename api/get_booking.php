@@ -109,7 +109,7 @@ $bookings = [];
         $.post("./api/order.php", {
             seats,
             movie: $("#movie option:selected").text(),
-            date: $("#day option:selected").text(),
+            date: $("#day option:selected").val(),
             session:$("#session option:selected").val()},
             (result)=>{
                 console.log(result)
