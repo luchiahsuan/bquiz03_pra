@@ -4,9 +4,18 @@ function sw(table,id1,id2){
     })
 }
 
-function del(table,id){
+function del(table,id,msg){
 
-    let chk=confirm("是否確定要刪除");
+
+    let chk;
+    if(typeof(msg)!='unfefind'){
+    chk=confirm(msg);
+
+    }else{
+
+        chk=confirm("是否確定要刪除");
+    }
+    
     if(chk){
         $.post('./api/del.php',{table,id},()=>{
             location.reload();
